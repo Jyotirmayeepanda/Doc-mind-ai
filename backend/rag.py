@@ -3,6 +3,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "BAAI/bge-small-en-v1.5")
+RERANKER_MODEL  = os.getenv("RERANKER_MODEL", "cross-encoder/ms-marco-MiniLM-L-6-v2")
+
 # ── LAZY LOADING — models load only when first used ───────────────────────────
 _llm = None
 _embeddings = None
@@ -28,9 +31,11 @@ def get_llm():
 def get_embeddings():
     global _embeddings
     if _embeddings is None:
+        print(f"⏳ Loading embedding model: {EMBEDDING_MODEL}")
+        print("   (First time downloads ~130MB from HuggingFace — can take 5-15 min on slow WiFi)")
         from langchain_community.embeddings import HuggingFaceEmbeddings
         _embeddings = HuggingFaceEmbeddings(
-            model_name="BAAI/bge-large-en-v1.5",
+            model_name=EMBEDDING_MODEL,
             encode_kwargs={"normalize_embeddings": True}
         )
         print("✅ Embeddings loaded")
@@ -39,8 +44,9 @@ def get_embeddings():
 def get_reranker():
     global _reranker
     if _reranker is None:
+        print(f"⏳ Loading reranker model: {RERANKER_MODEL}")
         from sentence_transformers import CrossEncoder
-        _reranker = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")
+        _reranker = CrossEncoder(RERANKER_MODEL)
         print("✅ Reranker loaded")
     return _reranker
 

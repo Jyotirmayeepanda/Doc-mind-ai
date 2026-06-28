@@ -62,11 +62,14 @@ export default function Sidebar({
       setCompletedSteps((p) => [...p, "chunk"]);
 
       setPipelineStage("embed");
+      setError("⏳ First upload downloads AI models (~130MB). Watch backend terminal — can take 5-15 min on slow WiFi. Do not close!");
 
       const res = await API.post("/upload", formData, {
         headers: { "Content-Type": "multipart/form-data" },
-        timeout: 300000,
+        timeout: 900000,
       });
+
+      setError("");
 
       setCompletedSteps((p) => [...p, "embed", "ready"]);
       setPipelineStage("ready");

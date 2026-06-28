@@ -42,7 +42,14 @@ if not exist .env (
   echo       backend\.env already exists
 )
 
-echo [2/3] Setting up React frontend...
+echo [2/4] Downloading AI models (one-time, ~5-15 min)...
+echo       DO NOT CLOSE - this fixes "embedding loading forever"
+python download_models.py
+if errorlevel 1 (
+  echo [WARN] Model download failed - check internet and run: python download_models.py
+)
+
+echo [3/4] Setting up React frontend...
 cd ..\frontend
 call npm install
 if errorlevel 1 (
@@ -51,7 +58,7 @@ if errorlevel 1 (
 )
 
 cd ..
-echo [3/3] Setup complete!
+echo [4/4] Setup complete!
 echo.
 echo ========================================
 echo   HOW TO RUN (2 VS Code terminals)
