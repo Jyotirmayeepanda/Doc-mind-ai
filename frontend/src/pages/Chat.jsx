@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import ChatArea from "../components/ChatArea";
 import API from "../api";
+import indianOilLogo from "../assets/indian-oil-logo.png";
 
 export default function Chat() {
   const navigate = useNavigate();
@@ -30,8 +31,8 @@ export default function Chat() {
     <div className="app-container">
       <div className="navbar">
         <div className="navbar-left">
-          <span className="navbar-logo">🤖</span>
-          <span className="navbar-title">Doc mind ai</span>
+          <img src={indianOilLogo} alt="Indian Oil" className="brand-logo brand-logo-nav" />
+          <span className="navbar-title">Indian Oil Corporation Limited</span>
         </div>
         <div className="navbar-right">
           <button className="nav-btn" onClick={() => navigate("/history")}>
