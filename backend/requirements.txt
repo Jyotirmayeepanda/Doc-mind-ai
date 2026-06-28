@@ -1,0 +1,31 @@
+# ── Web framework ──────────────────────────────────────────────
+fastapi>=0.110.0
+uvicorn[standard]>=0.29.0
+python-multipart>=0.0.9          # required for file/form uploads
+pydantic>=2.6.0
+
+# ── Config ─────────────────────────────────────────────────────
+python-dotenv>=1.0.1
+
+# ── Auth ───────────────────────────────────────────────────────
+python-jose[cryptography]>=3.3.0
+bcrypt>=4.1.0
+
+# ── Database ───────────────────────────────────────────────────
+SQLAlchemy>=2.0.0
+
+# ── RAG / LLM ──────────────────────────────────────────────────
+langchain-groq>=0.1.0
+langchain-community>=0.2.0
+langchain-text-splitters>=0.2.0
+sentence-transformers>=2.7.0     # CrossEncoder reranker + embeddings backend
+faiss-cpu>=1.8.0
+
+# ── Document loaders ───────────────────────────────────────────
+PyMuPDF>=1.24.0                  # imported as "fitz" (PDF)
+python-docx>=1.1.0              # DOCX
+openpyxl>=3.1.0                 # XLSX
+
+# ── Voice ──────────────────────────────────────────────────────
+openai-whisper>=20231117       # speech-to-text
+gTTS>=2.5.0                    # text-to-speech
